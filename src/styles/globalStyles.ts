@@ -1,7 +1,10 @@
 const globalStyles = {
     colors: {
-      background: 'black',
-      text: 'white',
+      background: '#3A3A3A',
+      title: '#FFFFFF',
+      subTitle: '#FFFFFF',
+      backgroundButton:'#3A5A77',
+      footerText:'#0095FF',
     },
     fonts: {
       interBold: 'InterBold',
@@ -14,8 +17,8 @@ const globalStyles = {
     },
     fontSizes: {
       large: 24,
-      medium: 18,
-      small: 14,
+      medium: 21,
+      small: 16,
     },
   };
   
