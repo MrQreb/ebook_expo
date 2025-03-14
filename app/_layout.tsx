@@ -1,4 +1,4 @@
-import "../global.css";
+
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -18,12 +18,12 @@ export default function RootLayout() {
     InterBold: require("../src/assets/fonts/Inter_24pt-Bold.ttf"),
     InterRegular: require("../src/assets/fonts/Inter_24pt-Regular.ttf"),
     InterSemiBold: require("../src/assets/fonts/Inter_24pt-SemiBold.ttf"),
-   
+
     JetBrainsMonoBold: require("../src/assets/fonts/JetBrainsMono-Bold.ttf"),
     JetBrainsMonoSemiBold: require("../src/assets/fonts/JetBrainsMono-SemiBold.ttf"),
     JetBrainsMonoRegular: require("../src/assets/fonts/JetBrainsMono-Regular.ttf"),
     JetBrainsMonoThin: require("../src/assets/fonts/JetBrainsMonoNL-Thin.ttf"),
- 
+
   });
 
   useEffect(() => {
@@ -37,12 +37,12 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)/index" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
   );
 }
