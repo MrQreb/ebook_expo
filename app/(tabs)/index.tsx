@@ -1,6 +1,6 @@
 
-import Login from '@/src/screens/Login';
 import { ScreenContainer } from '@/src/screens/Screen-Container';
+import Login from '@/src/screens/Login';
 
 export default function HomeScreen() {
   return (
