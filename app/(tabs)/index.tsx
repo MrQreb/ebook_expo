@@ -3,7 +3,7 @@ import { Text ,StyleSheet } from 'react-native';
 export default function HomeScreen() {
   return (
     // <PdfReader/>
-    <Text className="m-auto font-JetBrainsMonoBold text-3xl">Hola</Text>
+    <Text className="m-auto font-inter text-7xl">Hola</Text>
   );
 }
 

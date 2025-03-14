@@ -15,14 +15,14 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    InterBold: require("../assets/fonts/Inter_24pt-Bold.ttf"),
-    InterRegular: require("../assets/fonts/Inter_24pt-Regular.ttf"),
-    InterSemiBold: require("../assets/fonts/Inter_24pt-SemiBold.ttf"),
+    InterBold: require("../src/assets/fonts/Inter_24pt-Bold.ttf"),
+    InterRegular: require("../src/assets/fonts/Inter_24pt-Regular.ttf"),
+    InterSemiBold: require("../src/assets/fonts/Inter_24pt-SemiBold.ttf"),
    
-    JetBrainsMonoBold: require("../assets/fonts/JetBrainsMono-Bold.ttf"),
-    JetBrainsMonoSemiBold: require("../assets/fonts/JetBrainsMono-SemiBold.ttf"),
-    JetBrainsMonoRegular: require("../assets/fonts/JetBrainsMono-Regular.ttf"),
-    JetBrainsMonoThin: require("../assets/fonts/JetBrainsMonoNL-Thin.ttf"),
+    JetBrainsMonoBold: require("../src/assets/fonts/JetBrainsMono-Bold.ttf"),
+    JetBrainsMonoSemiBold: require("../src/assets/fonts/JetBrainsMono-SemiBold.ttf"),
+    JetBrainsMonoRegular: require("../src/assets/fonts/JetBrainsMono-Regular.ttf"),
+    JetBrainsMonoThin: require("../src/assets/fonts/JetBrainsMonoNL-Thin.ttf"),
  
   });
 
