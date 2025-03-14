@@ -15,7 +15,15 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    InterBold: require("../assets/fonts/Inter_24pt-Bold.ttf"),
+    InterRegular: require("../assets/fonts/Inter_24pt-Regular.ttf"),
+    InterSemiBold: require("../assets/fonts/Inter_24pt-SemiBold.ttf"),
+   
+    JetBrainsMonoBold: require("../assets/fonts/JetBrainsMono-Bold.ttf"),
+    JetBrainsMonoSemiBold: require("../assets/fonts/JetBrainsMono-SemiBold.ttf"),
+    JetBrainsMonoRegular: require("../assets/fonts/JetBrainsMono-Regular.ttf"),
+    JetBrainsMonoThin: require("../assets/fonts/JetBrainsMonoNL-Thin.ttf"),
+ 
   });
 
   useEffect(() => {

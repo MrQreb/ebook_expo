@@ -1,9 +1,9 @@
-import {  StyleSheet } from 'react-native';
-import PdfReader from '@/components/PdfReader';
+import { Text ,StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
   return (
-    <PdfReader/>
+    // <PdfReader/>
+    <Text className="m-auto font-JetBrainsMonoBold text-3xl">Hola</Text>
   );
 }
 

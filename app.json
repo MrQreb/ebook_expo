@@ -32,6 +32,23 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Inter_24pt-Bold.ttf",
+            "./assets/fonts/Inter_24pt-Regular.ttf",
+            "./assets/fonts/Inter_24pt-SemiBold.ttf",
+
+            "./assets/fonts/JetBrainsMono-Regular.ttf",
+            "./assets/fonts/JetBrainsMono-SemiBold.ttf",
+            "./assets/fonts/JetBrainsMono-Bold.ttf",
+            "./assets/fonts/JetBrainsMonoNL-Thin.ttf"
+            
+           
+          ]
+        }
       ]
     ],
     "experiments": {
