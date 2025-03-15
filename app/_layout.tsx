@@ -1,14 +1,11 @@
-
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import Register from '@/src/screens/Register';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -24,7 +21,6 @@ export default function RootLayout() {
     JetBrainsMonoSemiBold: require("../src/assets/fonts/JetBrainsMono-SemiBold.ttf"),
     JetBrainsMonoRegular: require("../src/assets/fonts/JetBrainsMono-Regular.ttf"),
     JetBrainsMonoThin: require("../src/assets/fonts/JetBrainsMonoNL-Thin.ttf"),
-
   });
 
   useEffect(() => {
@@ -38,6 +34,7 @@ export default function RootLayout() {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)/index" options={{ headerShown: false }} />
@@ -46,5 +43,6 @@ export default function RootLayout() {
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
