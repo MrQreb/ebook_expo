@@ -1,7 +1,8 @@
-import { View, StyleSheet, Text, TextInput, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { View, StyleSheet, Text, TextInput, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity } from "react-native";
 import globalStyles from '@/src/styles/globalStyles';
-import FooterLogin from "@/components/ui/login/Footer";
 import ButtonLogin from '@/components/ui/login/Button';
+import { Eye } from 'lucide-react-native';
+import FooterLogin from '@/components/ui/login/Footer';
 
 const handleLogin = () => {
     console.log('login');
@@ -22,24 +23,36 @@ const Register = () => {
                 <View style={styles.rowContainerInputs}>
                     <View style={styles.rowInputs}>
                         <Text style={styles.inputText}>Correo Electronico</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Escribe aquí..." 
-                        />
+                        <View style={styles.inputContainer}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Escribe aquí..."
+                            />
+                        </View>
                     </View>
 
                     <View style={styles.rowInputs}>
                         <Text style={styles.inputText}>Contraseña</Text>
-                        <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
+                        <View style={styles.inputContainer}>
+                            <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
+                            <TouchableOpacity style={styles.iconContainer}>
+                                <Eye color="white" size={30} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                     <View style={styles.rowInputs}>
                         <Text style={styles.inputText}>Confirmar Contraseña</Text>
-                        <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
+                        <View style={styles.inputContainer}>
+                            <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
+                            <TouchableOpacity style={styles.iconContainer}>
+                                <Eye color="white" size={30} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
 
-                <ButtonLogin text="Crear" onPress={handleLogin}/>
+                <ButtonLogin text="Crear" onPress={handleLogin} />
 
                 <FooterLogin text1="¿Tienes cuenta?" href="./login" text2="Incia Sesión" />
             </ScrollView>
@@ -80,7 +93,7 @@ const styles = StyleSheet.create({
     rowContainerInputs: {
         width: '100%',
         height: '50%',
-        marginBottom: 20, // Add margin bottom to create space between inputs and button
+        marginBottom: 20,
     },
     rowInputs: {
         flex: 1,
@@ -93,7 +106,9 @@ const styles = StyleSheet.create({
         fontFamily: globalStyles.fonts.jetBrainsMonoSemiBold,
         fontSize: globalStyles.fontSizes.medium,
     },
-    input: {
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         borderRadius: 50,
         borderColor: 'black',
         borderWidth: 2,
@@ -101,8 +116,17 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: 10,
     },
+    input: {
+        flex: 1,
+        height: '100%',
+    },
+    iconContainer: {
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+    },
     button: {
-        marginTop: 20, // Add margin top to create space between inputs and button
+        marginTop: 20, 
     },
 });
 
