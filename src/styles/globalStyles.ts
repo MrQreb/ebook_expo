@@ -19,6 +19,7 @@ const globalStyles = {
       large: 24,
       medium: 21,
       small: 16,
+      extraLarge:36
     },
   };
   

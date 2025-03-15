@@ -30,7 +30,7 @@ const FooterLogin = ({ href = "./defaultPath1", text1, text2 }: FooterLoginProps
 const styles = StyleSheet.create({
   rowFooter: {
     width: '100%',
-    height: height * 0.2, 
+    height: '20%', 
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',

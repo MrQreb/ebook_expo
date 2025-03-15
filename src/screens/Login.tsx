@@ -1,9 +1,8 @@
-import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet,Text } from "react-native";
 import { Image } from 'expo-image';
 import globalStyles from '@/src/styles/globalStyles';
 import FooterLogin from "@/components/ui/login/Footer";
-import ButtonLogin from '@/components/ui/login/Button'; // Ensure this path is correct
-
+import ButtonLogin from '@/components/ui/login/Button'; 
 const handleLogin = () => {
     console.log('login');
 };
@@ -25,7 +24,7 @@ const Login = () => {
 
             <ButtonLogin text="Login" onPress={handleLogin} />
 
-            <FooterLogin text1="¿No tienes cuenta?" href="./create" text2="Crear una cuenta" />
+            <FooterLogin text1="¿No tienes cuenta?" href="../register" text2="Crear una cuenta" />
         </View>
     );
 };
