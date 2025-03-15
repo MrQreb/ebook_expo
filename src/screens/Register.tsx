@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Dimensions, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import globalStyles from '@/src/styles/globalStyles';
 import FooterLogin from "@/components/ui/login/Footer";
 import ButtonLogin from '@/components/ui/login/Button';
@@ -9,49 +9,53 @@ const handleLogin = () => {
 
 const Register = () => {
     return (
-        <View style={styles.container}>
-
-            <View style={styles.rowTitle}>
-                <Text style={styles.title}>Crear Cuenta</Text>
-                <Text style={styles.subTitle}>Nos alegra tenerte en ebook</Text>
-            </View>
-
-            <View style={styles.rowContainerInputs}>
-
-                <View style={styles.rowInputs}>
-                    <Text style={styles.inputText}>Correo Electronico</Text>
-                    <TextInput style={styles.input} placeholder="Escribe aquí..."
-                    ></TextInput>
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                <View style={styles.rowTitle}>
+                    <Text style={styles.title}>Crear Cuenta</Text>
+                    <Text style={styles.subTitle}>Nos alegra tenerte en ebook</Text>
                 </View>
 
-                <View style={styles.rowInputs}>
-                    <Text style={styles.inputText}>Contraseña</Text>
-                    <TextInput style={styles.input} placeholder="Escribe aquí..."
-                    ></TextInput>
+                <View style={styles.rowContainerInputs}>
+                    <View style={styles.rowInputs}>
+                        <Text style={styles.inputText}>Correo Electronico</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Escribe aquí..." 
+                        />
+                    </View>
+
+                    <View style={styles.rowInputs}>
+                        <Text style={styles.inputText}>Contraseña</Text>
+                        <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
+                    </View>
+
+                    <View style={styles.rowInputs}>
+                        <Text style={styles.inputText}>Confirmar Contraseña</Text>
+                        <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
+                    </View>
                 </View>
 
-                <View style={styles.rowInputs}>
-                    <Text style={styles.inputText}>Confirmar Contraseña</Text>
-                    <TextInput style={styles.input} placeholder="Escribe aquí..."
-                    ></TextInput>
-                </View>
+                <ButtonLogin text="Crear" onPress={handleLogin}/>
 
-            </View>
-
-            <ButtonLogin text="Crear" onPress={handleLogin} />
-
-            <FooterLogin text1="¿No tienes cuenta?" href="./create" text2="Crear una cuenta" />
-        </View>
+                <FooterLogin text1="¿Tienes cuenta?" href="./login" text2="Incia Sesión" />
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
-        width: '100%',
+        flex: 1,
+        backgroundColor: globalStyles.colors.background,
+    },
+    scrollContainer: {
+        flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: globalStyles.colors.background,
     },
     rowTitle: {
         width: '100%',
@@ -70,15 +74,13 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         textAlign: 'center',
         fontFamily: globalStyles.fonts.jetBrainsMonoThin,
-        fontSize: globalStyles.fontSizes.medium,
+        fontSize: globalStyles.fontSizes.small,
         color: globalStyles.colors.subTitle,
     },
-
-
     rowContainerInputs: {
         width: '100%',
         height: '50%',
-        // backgroundColor: 'white',
+        marginBottom: 20, // Add margin bottom to create space between inputs and button
     },
     rowInputs: {
         flex: 1,
@@ -92,13 +94,16 @@ const styles = StyleSheet.create({
         fontSize: globalStyles.fontSizes.medium,
     },
     input: {
-        borderRadius: 20,
+        borderRadius: 50,
         borderColor: 'black',
         borderWidth: 2,
-        height: '60%',
+        height: 50,
         width: '100%',
+        paddingHorizontal: 10,
     },
-
+    button: {
+        marginTop: 20, // Add margin top to create space between inputs and button
+    },
 });
 
 export default Register;
