@@ -1,14 +1,30 @@
-import { View, StyleSheet, Text, TextInput, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import globalStyles from '@/src/styles/globalStyles';
 import ButtonLogin from '@/components/ui/login/Button';
-import { Eye } from 'lucide-react-native';
 import FooterLogin from '@/components/ui/login/Footer';
-
-const handleLogin = () => {
-    console.log('login');
-};
+import { useState } from 'react';
+import PasswordInput from "../components/ui/login/PasswordInput";
+import Input from '../components/ui/login/Input';
 
 const Register = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const checkPassword = (firstText: string, secondText: string): boolean => {
+        return firstText === secondText;
+    }
+
+
+    const handleLogin = () => {
+        const correctPassword = checkPassword(password,confirmPassword);
+        console.log(correctPassword)
+        console.log('Email:', email);
+        console.log('Password:', password);
+        console.log('Confirm Password:', confirmPassword);
+    };
+
+    
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -20,36 +36,18 @@ const Register = () => {
                     <Text style={styles.subTitle}>Nos alegra tenerte en ebook</Text>
                 </View>
 
+                {/* Inputs */}
                 <View style={styles.rowContainerInputs}>
-                    <View style={styles.rowInputs}>
-                        <Text style={styles.inputText}>Correo Electronico</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Escribe aquí..."
-                            />
-                        </View>
-                    </View>
 
-                    <View style={styles.rowInputs}>
-                        <Text style={styles.inputText}>Contraseña</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
-                            <TouchableOpacity style={styles.iconContainer}>
-                                <Eye color="white" size={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <Input
+                        onChangeText={setEmail}
+                        textInput="Correo Electronico"
+                        textPlaceHolder="Ingrese su correo"
+                        value={email}
+                    />
+                    <PasswordInput value={password} onChangeText={setPassword} />
+                    <PasswordInput value={confirmPassword} onChangeText={setConfirmPassword} />
 
-                    <View style={styles.rowInputs}>
-                        <Text style={styles.inputText}>Confirmar Contraseña</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput style={styles.input} placeholder="Escribe aquí..." secureTextEntry />
-                            <TouchableOpacity style={styles.iconContainer}>
-                                <Eye color="white" size={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
                 </View>
 
                 <ButtonLogin text="Crear" onPress={handleLogin} />
@@ -94,39 +92,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '50%',
         marginBottom: 20,
-    },
-    rowInputs: {
-        flex: 1,
-        marginVertical: 12,
-        marginHorizontal: 30
-    },
-    inputText: {
-        marginBottom: 5,
-        color: globalStyles.colors.subTitle,
-        fontFamily: globalStyles.fonts.jetBrainsMonoSemiBold,
-        fontSize: globalStyles.fontSizes.medium,
-    },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 50,
-        borderColor: 'black',
-        borderWidth: 2,
-        height: 50,
-        width: '100%',
-        paddingHorizontal: 10,
-    },
-    input: {
-        flex: 1,
-        height: '100%',
-    },
-    iconContainer: {
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-    },
-    button: {
-        marginTop: 20, 
     },
 });
 
