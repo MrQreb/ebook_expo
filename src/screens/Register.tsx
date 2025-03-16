@@ -1,30 +1,55 @@
 import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import globalStyles from '@/src/styles/globalStyles';
 import ButtonLogin from '@/components/ui/login/Button';
 import FooterLogin from '@/components/ui/login/Footer';
-import { useState } from 'react';
 import PasswordInput from "../components/ui/login/PasswordInput";
 import Input from '../components/ui/login/Input';
+import Toast from 'react-native-toast-message';
+import ErrorMessage from "../components/ui/login/ErrorMessage";
+import { showModal } from "../helpers/show-modal";
+import { useRouter } from "expo-router";
+
+const schema = z.object({
+    email: z.string({
+        errorMap: () => ({ message: 'Correo Requerido' })
+    }).email('El correro electronico no valido'),
+
+    password: z.string({
+        errorMap: () => ({ message: 'Contraseña requerida' })
+    }).min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
+
+    confirmPassword: z.string({
+
+        errorMap: () => ({ message: 'Confirmación requerida' })
+    }).min(6, { message: 'La confirmacion debe tener al menos 6 caracteres' }),
+}).refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirmPassword"],
+});
 
 const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const router = useRouter();
 
-    const checkPassword = (firstText: string, secondText: string): boolean => {
-        return firstText === secondText;
-    }
+    const {
+        handleSubmit,
+        setValue,
+        formState: { errors }
+    } = useForm({
+        resolver: zodResolver(schema),
+    });
 
+    const handleRegister = (data: { email: string; password: string; confirmPassword: string }) => {
+        console.log("Datos del usuario:", data);
+        showModal({ text1: '🎉 Registro Exitoso', text2: 'Has sido registrado en ebook', type: 'success', visibilityTime: 1300 });
 
-    const handleLogin = () => {
-        const correctPassword = checkPassword(password,confirmPassword);
-        console.log(correctPassword)
-        console.log('Email:', email);
-        console.log('Password:', password);
-        console.log('Confirm Password:', confirmPassword);
+        setTimeout(() => {
+            router.replace('/');
+        }, 1300);
     };
 
-    
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -38,22 +63,29 @@ const Register = () => {
 
                 {/* Inputs */}
                 <View style={styles.rowContainerInputs}>
-
                     <Input
-                        onChangeText={setEmail}
-                        textInput="Correo Electronico"
+                        textInput="Correo Electrónico"
                         textPlaceHolder="Ingrese su correo"
-                        value={email}
+                        onChangeText={(text) => setValue("email", text, { shouldValidate: true })}
                     />
-                    <PasswordInput value={password} onChangeText={setPassword} />
-                    <PasswordInput value={confirmPassword} onChangeText={setConfirmPassword} />
+                    {errors.email && <ErrorMessage message={errors.email?.message || ""} />}
 
+                    <PasswordInput
+                        onChangeText={(text) => setValue("password", text, { shouldValidate: true })}
+                    />
+                    {errors.password && <ErrorMessage message={errors.password?.message || ""} />}
+
+                    <PasswordInput
+                        onChangeText={(text) => setValue("confirmPassword", text, { shouldValidate: true })}
+                    />
+                    {errors.confirmPassword && <ErrorMessage message={errors.confirmPassword.message || ""} />}
                 </View>
 
-                <ButtonLogin text="Crear" onPress={handleLogin} />
-
-                <FooterLogin text1="¿Tienes cuenta?" href="./login" text2="Incia Sesión" />
+                <ButtonLogin text="Crear" onPress={handleSubmit(handleRegister)} />
+                <FooterLogin text1="¿Tienes cuenta?" href="./login" text2="Inicia Sesión" />
             </ScrollView>
+
+            <Toast />
         </KeyboardAvoidingView>
     );
 };

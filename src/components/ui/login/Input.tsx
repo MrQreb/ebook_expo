@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, TextInput, } from "react-native";
 import globalStyles from "../../../styles/globalStyles";
 
 interface InputProps {
-    value: string;
+    value?: string;
     onChangeText: (text: string) => void;
     textInput:string;
     textPlaceHolder:string

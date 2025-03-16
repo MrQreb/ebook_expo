@@ -55,3 +55,9 @@ Join our community of developers creating universal apps.
 -  React Native Reanimated
 
 - React Native Gesture Handler
+
+- React Native Toast Message
+
+## Data Validation
+- React Hook Form 
+- Zod

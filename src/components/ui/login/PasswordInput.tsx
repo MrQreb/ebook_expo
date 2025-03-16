@@ -4,7 +4,7 @@ import { Eye, EyeOff } from "lucide-react-native";
 import { useState, useCallback, useMemo } from "react";
 
 interface PasswordInputProps {
-    value: string;
+    value?: string;
     onChangeText: (text: string) => void;
 }
 
