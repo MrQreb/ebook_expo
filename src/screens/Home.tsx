@@ -1,13 +1,20 @@
-import { View, StyleSheet,Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { Image } from 'expo-image';
 import globalStyles from '@/src/styles/globalStyles';
 import FooterLogin from "@/components/ui/login/Footer";
-import ButtonLogin from '@/components/ui/login/Button'; 
-const handleLogin = () => {
-    console.log('login');
-};
+import ButtonLogin from '@/components/ui/login/Button';
+import { useRouter } from "expo-router";
 
-const Login = () => {
+
+const Home = () => {
+
+    const router = useRouter();
+
+    const handleLogin = () => {
+        router.replace('../login');
+        console.log('login')
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.rowImage}>
@@ -73,4 +80,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Login;
+export default Home;
