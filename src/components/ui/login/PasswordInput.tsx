@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
-import globalStyles from "../../../styles/globalStyles";
 import { Eye, EyeOff } from "lucide-react-native";
 import { useState, useCallback, useMemo } from "react";
+import globalStyles from "@/src/styles/globalStyles";
 
 interface PasswordInputProps {
     value?: string;
@@ -20,13 +20,14 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChangeText }) =>
 
     return (
         <View style={styles.rowInputs}>
-            <Text style={styles.inputText}>Contraseña</Text>
+            <Text style={styles.labelText}>Contraseña</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder="Escribe aquí..."
                     secureTextEntry={!isVisible}
                     value={value}
+                    placeholderTextColor={globalStyles.colors.subTitle}
                     onChangeText={onChangeText}
                 />
                 <TouchableOpacity onPress={handleChangeVisibility} style={styles.iconContainer}>
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         marginVertical: 12,
         marginHorizontal: 30
     },
-    inputText: {
+    labelText: {
         marginBottom: 5,
         color: globalStyles.colors.subTitle,
         fontFamily: globalStyles.fonts.jetBrainsMonoSemiBold,
@@ -62,6 +63,8 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: '100%',
+        color:'white',
+        fontFamily:globalStyles.fonts.jetBrainsMonoSemiBold,        
     },
     iconContainer: {
         justifyContent: 'flex-end',

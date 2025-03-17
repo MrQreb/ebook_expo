@@ -12,12 +12,13 @@ const Input: React.FC<InputProps> = ({ value, onChangeText, textInput ,textPlace
 
     return (
         <View style={styles.rowInputs}>
-            <Text style={styles.inputText}>{textInput}</Text>
+            <Text style={styles.labelText}>{textInput}</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder={textPlaceHolder}
                     value={value}
+                    placeholderTextColor={globalStyles.colors.subTitle}
                     onChangeText={onChangeText}
                 />
             </View>
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         marginVertical: 12,
         marginHorizontal: 30
     },
-    inputText: {
+    labelText: {
         marginBottom: 5,
         color: globalStyles.colors.subTitle,
         fontFamily: globalStyles.fonts.jetBrainsMonoSemiBold,
@@ -50,6 +51,8 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: '100%',
+        color:'white',
+        fontFamily:globalStyles.fonts.jetBrainsMonoSemiBold,        
     },
 });
 
