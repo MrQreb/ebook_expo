@@ -14,7 +14,6 @@ const Home = () => {
 
     const handleLogin = () => {
         router.replace('../login');
-        console.log('login')
     };
 
     return (

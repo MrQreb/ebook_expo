@@ -12,6 +12,7 @@ import ErrorMessage from "../components/ui/login/ErrorMessage";
 import { showModal } from "../helpers/show-modal";
 import { useRouter } from "expo-router";
 import { createAccount } from "@/src/api/auth/createAccount"; 
+import { redirectTo } from "../helpers/redirect-to";
 
 const schema = z.object({
     email: z.string({
@@ -46,10 +47,7 @@ const Register = () => {
 
             await createAccount(data.email, data.password);
             showModal({ text1: '🎉 Registro Exitoso', text2: 'Has sido registrado en ebook', type: 'success', visibilityTime: 1300 });
-            setTimeout(() => {
-                router.replace('/');
-            }, 1300);
-
+            redirectTo(router,'/',1300);
 
         } catch (error: any) {
             showModal({ text1: ' Error en la red', text2: 'Verifique su conexión a internet', type: 'success', visibilityTime: 6000 });

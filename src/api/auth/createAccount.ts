@@ -18,7 +18,7 @@ export async function createAccount(email: string, password: string) {
 
         if (!response.ok) {
             const errorText = await response.text();
-            const errorData = JSON.parse(errorText); // Parseamos el JSON del error
+            const errorData = JSON.parse(errorText); 
             throw {
                 status: response.status,
                 message: errorData.message || "Error desconocido",
@@ -29,6 +29,6 @@ export async function createAccount(email: string, password: string) {
         return await response.json();
     } catch (error) {
         console.error("Error creating account:", error);
-        throw error; // Re-lanzamos el error para que el componente lo maneje
+        throw error; 
     }
 }

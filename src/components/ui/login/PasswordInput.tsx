@@ -13,7 +13,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChangeText }) =>
 
     const handleChangeVisibility = useCallback(() => {
         setIsVisible(prevState => !prevState);
-        console.log(isVisible);
     }, [isVisible]);
 
     const eyeIcon = useMemo(() => isVisible ? <EyeOff color="white" size={30} /> : <Eye color="white" size={30} />, [isVisible]);

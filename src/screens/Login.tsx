@@ -12,6 +12,7 @@ import ErrorMessage from "../components/ui/login/ErrorMessage";
 import { showModal } from "../helpers/show-modal";
 import { useRouter } from "expo-router";
 import { login } from '../api/auth/login';
+import { redirectTo } from "../helpers/redirect-to";
 
 const schema = z.object({
     email: z.string({
@@ -39,12 +40,11 @@ const Login = () => {
         try {
             await login(data.email, data.password)
             showModal({ text1: '📖 Bienvenido a ebook', text2: 'Nos alegra tenerte de nuevo', type: 'success', visibilityTime: 1300 });
-            // setTimeout(() => {
-            //     router.replace('/');
-            // }, 1300);
+           redirectTo(router,'../books',1300)
         } catch (error: any) {
-            if (error.message === 'incorrect password') showModal({ text1: '❌Verifica tus credenciales', text2: 'Verifique correo o contraseña', type: 'error', visibilityTime: 3300 });
-            if (error.message === 'email not found') showModal({ text1: '❌Este correo no ha sido registrado', text2: 'Cree una nueva cuenta', type: 'info', visibilityTime: 3300 });
+            console.log(error)
+            if (error.message === 'incorrect password') showModal({ text1: '❌ Verifica tus credenciales', text2: 'Verifique correo o contraseña', type: 'error', visibilityTime: 3300 });
+            if (error.message === 'email not found') showModal({ text1: '❌ Este correo no ha sido registrado', text2: 'Cree una nueva cuenta', type: 'info', visibilityTime: 3300 });
             // showModal({ text1: '❌ Verifique su red', text2: 'Arregle los errores de red', type: 'info', visibilityTime: 3300 })
         }
 
