@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import Drawer from '../components/ui/Drawer';
 import Pagination from '../components/ui/books/Pagination';
-import Books from '../components/ui/books/Book';
+import Books from '../components/ui/books/Books';
 
 
 const BooksScreen = () => {
@@ -17,9 +17,8 @@ const BooksScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    minWidth: '100%',
     minHeight: '100%',
-    
   },
 
 });
