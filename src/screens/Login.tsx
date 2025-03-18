@@ -11,6 +11,7 @@ import Toast from 'react-native-toast-message';
 import ErrorMessage from "../components/ui/login/ErrorMessage";
 import { showModal } from "../helpers/show-modal";
 import { useRouter } from "expo-router";
+import { login } from '../api/auth/login';
 
 const schema = z.object({
     email: z.string({
@@ -33,13 +34,20 @@ const Login = () => {
         resolver: zodResolver(schema),
     });
 
-    const handleRegister = (data: { email: string; password: string; }) => {
-        console.log("Datos del usuario:", data);
-        // showModal({ text1: '🎉 Registro Exitoso', text2: 'Has sido registrado en ebook', type: 'success', visibilityTime: 1300 });
+    const handleRegister = async (data: { email: string; password: string; }) => {
 
-        // setTimeout(() => {
-        //     router.replace('/');
-        // }, 1300);
+        try {
+            await login(data.email, data.password)
+            showModal({ text1: '📖 Bienvenido a ebook', text2: 'Nos alegra tenerte de nuevo', type: 'success', visibilityTime: 1300 });
+            // setTimeout(() => {
+            //     router.replace('/');
+            // }, 1300);
+        } catch (error: any) {
+            if (error.message === 'incorrect password') showModal({ text1: '❌Verifica tus credenciales', text2: 'Verifique correo o contraseña', type: 'error', visibilityTime: 3300 });
+            if (error.message === 'email not found') showModal({ text1: '❌Este correo no ha sido registrado', text2: 'Cree una nueva cuenta', type: 'info', visibilityTime: 3300 });
+            // showModal({ text1: '❌ Verifique su red', text2: 'Arregle los errores de red', type: 'info', visibilityTime: 3300 })
+        }
+
     };
 
     return (
@@ -49,7 +57,7 @@ const Login = () => {
         >
             <ScrollView contentContainerStyle={styles.scrollContainer}>
 
-                
+
                 <View style={styles.rowTitle}>
                     <Text style={styles.title}>Iniciar Sesión</Text>
                     <Text style={styles.subTitle}>Bienvenido de nuevo a ebook</Text>

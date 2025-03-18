@@ -11,6 +11,7 @@ import Toast from 'react-native-toast-message';
 import ErrorMessage from "../components/ui/login/ErrorMessage";
 import { showModal } from "../helpers/show-modal";
 import { useRouter } from "expo-router";
+import { createAccount } from "@/src/api/auth/createAccount"; 
 
 const schema = z.object({
     email: z.string({
@@ -22,7 +23,6 @@ const schema = z.object({
     }).min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
 
     confirmPassword: z.string({
-
         errorMap: () => ({ message: 'Confirmación requerida' })
     }).min(6, { message: 'La confirmacion debe tener al menos 6 caracteres' }),
 }).refine((data) => data.password === data.confirmPassword, {
@@ -41,13 +41,20 @@ const Register = () => {
         resolver: zodResolver(schema),
     });
 
-    const handleRegister = (data: { email: string; password: string; confirmPassword: string }) => {
-        console.log("Datos del usuario:", data);
-        showModal({ text1: '🎉 Registro Exitoso', text2: 'Has sido registrado en ebook', type: 'success', visibilityTime: 1300 });
+    const handleRegister = async (data: { email: string; password: string; confirmPassword: string }) => {
+        try {
 
-        setTimeout(() => {
-            router.replace('/');
-        }, 1300);
+            await createAccount(data.email, data.password);
+            showModal({ text1: '🎉 Registro Exitoso', text2: 'Has sido registrado en ebook', type: 'success', visibilityTime: 1300 });
+            setTimeout(() => {
+                router.replace('/');
+            }, 1300);
+
+
+        } catch (error: any) {
+            showModal({ text1: ' Error en la red', text2: 'Verifique su conexión a internet', type: 'success', visibilityTime: 6000 });
+            if(error.message === 'email already exists' )  showModal({ text1: ' Correo previamente usado', text2: 'Este correo ya ha sido registrado', type: 'info', visibilityTime: 1300 });
+        }
     };
 
     return (

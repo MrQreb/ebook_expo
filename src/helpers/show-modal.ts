@@ -1,7 +1,7 @@
 import Toast from "react-native-toast-message";
 
 interface showModalProps {
-    type: 'success' | 'info'| 'success',
+    type: 'success' | 'info'| 'error',
     text1:string;
     text2:string;
     visibilityTime?:number

@@ -4,10 +4,12 @@ import globalStyles from '@/src/styles/globalStyles';
 import FooterLogin from "@/components/ui/login/Footer";
 import ButtonLogin from '@/components/ui/login/Button';
 import { useRouter } from "expo-router";
+import { envs } from "../config/envs";
 
 
 const Home = () => {
 
+    console.log(envs.API_EBOOK)
     const router = useRouter();
 
     const handleLogin = () => {
