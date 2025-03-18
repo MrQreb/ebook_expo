@@ -119,7 +119,9 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
         width: DRAWER_WIDTH,
-        backgroundColor: 'rgba(27, 27, 27, 0.92)', // Ajusta la transparencia aquí
+        height: '100%',
+
+        backgroundColor: 'rgba(27, 27, 27, 0.92)',
         padding: 20,
         borderRightWidth: .5,
         borderColor: 'gray',

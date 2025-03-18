@@ -31,7 +31,7 @@ const schema = z.object({
     path: ["confirmPassword"],
 });
 
-const Register = () => {
+const RegisterScreen = () => {
     const router = useRouter();
 
     const {
@@ -132,4 +132,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Register;
+export default RegisterScreen;

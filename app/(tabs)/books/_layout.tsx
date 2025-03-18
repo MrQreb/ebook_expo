@@ -1,10 +1,10 @@
-import RegisterScreen from '@/src/screens/RegisterScreen';
+import Register from '@/src/screens/RegisterScreen';
 import { ScreenContainer } from '@/src/screens/Screen-Container';
 
-export default function Register() {
+export default function HomeScreen() {
   return (
     <ScreenContainer>
-      <RegisterScreen />
+      <Register />
     </ScreenContainer>
   );
 }

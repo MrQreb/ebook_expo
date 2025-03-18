@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 import { envs } from "../config/envs";
 
 
-const Home = () => {
+const HomeScreen = () => {
 
     console.log(envs.API_EBOOK)
     const router = useRouter();
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default HomeScreen;

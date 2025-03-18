@@ -24,7 +24,7 @@ const schema = z.object({
     }).min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
 });
 
-const Login = () => {
+const LoginScreen = () => {
     const router = useRouter();
 
     const {
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Login;
+export default LoginScreen;

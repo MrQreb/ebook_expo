@@ -1,11 +1,10 @@
-import Login from '@/src/screens/Login';
-import Register from '@/src/screens/Register';
+import LoginScreen from '@/src/screens/LoginScreen';
 import { ScreenContainer } from '@/src/screens/Screen-Container';
 
-export default function RegisterScreen() {
+export default function Login() {
   return (
     <ScreenContainer>
-      <Login />
+      <LoginScreen />
     </ScreenContainer>
   );
 }
