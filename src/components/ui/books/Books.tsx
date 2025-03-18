@@ -48,13 +48,13 @@ const Books = () => {
                         </View>
 
                         <View style={styles.rowAuthor}>
-                            <Text style={styles.textAuthor} numberOfLines={1}>{ebook.ebook_author}</Text>
+                            <Text style={styles.textAuthor} numberOfLines={2}>{ebook.ebook_author} ({ebook.ebook_published})</Text>
                         </View>
 
                         <TouchableOpacity
                             style={styles.rowButton}
                             onPress={() => {
-                                redirectTo(router, '../read', 0,);
+                                router.navigate(`../read?ebookUrl=${(ebook.ebook_pdf_url)}`);
                             }}
                         >
                             <Text style={styles.texButton}>Leer</Text>
@@ -64,7 +64,7 @@ const Books = () => {
                     </View>
                 ))}
 
-                <View style={styles.rowBoook}>
+                {/* <View style={styles.rowBoook}>
                     <View style={styles.rowImage}>
                         <Image
                             source={{ uri: 'https://example.com/ebook1.jpg' }}
@@ -90,35 +90,9 @@ const Books = () => {
                         <Text style={styles.texButton}>Leer</Text>
                         <BookOpen size={18} color={'white'} />
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
-                <View style={styles.rowBoook}>
-                    <View style={styles.rowImage}>
-                        <Image
-                            source={{ uri: 'https://example.com/ebook2.jpg' }}
-                            style={styles.image}
-                            contentFit="fill"
-                        />
-                    </View>
 
-                    <View style={styles.rowTitle}>
-                        <Text style={styles.textTitle} numberOfLines={2}>Ebook Title 2</Text>
-                    </View>
-
-                    <View style={styles.rowAuthor}>
-                        <Text style={styles.textAuthor} numberOfLines={1}>Author 2</Text>
-                    </View>
-
-                    <TouchableOpacity
-                        style={styles.rowButton}
-                        onPress={() => {
-                            redirectTo(router, '../read', 1);
-                        }}
-                    >
-                        <Text style={styles.texButton}>Leer</Text>
-                        <BookOpen size={18} color={'white'} />
-                    </TouchableOpacity>
-                </View>
             </View>
 
         </>
@@ -169,7 +143,7 @@ const styles = StyleSheet.create({
     },
     rowAuthor: {
         width: '90%',
-        height: '5%',
+        height: '10%',
         marginTop: 5,
     },
     textAuthor: {

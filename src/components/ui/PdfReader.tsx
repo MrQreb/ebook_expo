@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Constants from 'expo-constants';
 
-interface PdfReaderProps{
-  pdfUrl:string
+interface PdfReaderProps {
+  pdfUrl: string;
 }
+
 export default function PdfReader({
   pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-}:PdfReaderProps) {
- 
-  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(pdfUrl)}`;
+}: PdfReaderProps) {
+  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(pdfUrl)}`;
 
   return (
     <WebView
