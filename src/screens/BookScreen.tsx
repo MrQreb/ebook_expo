@@ -11,6 +11,7 @@ const BooksScreen = () => {
       <Books></Books>
       <Pagination></Pagination>
       <Drawer/>
+
     </ScrollView>
   );
 };

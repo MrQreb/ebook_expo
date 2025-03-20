@@ -4,12 +4,13 @@ import { BookOpen } from 'lucide-react-native';
 import globalStyles from '@/src/styles/globalStyles';
 import { Ebook, getBooks } from '@/src/api/ebook/get';
 import { useEffect, useState } from 'react';
-import { redirectTo } from '@/src/helpers/redirect-to';
 import { useRouter } from "expo-router";
+import usePaginationStore from '@/src/store/pagination.store';
 
 const { height, width } = Dimensions.get('window');
 const Books = () => {
 
+    const { currentPage, setMaxPage } = usePaginationStore();
 
 
     const router = useRouter();
@@ -17,7 +18,8 @@ const Books = () => {
     let [ebooks, setEbooks] = useState<[]>([]);
     const fetchEbooks = async () => {
         try {
-            const data = await getBooks({ limit: 10, page: 1 });
+            const data = await getBooks({ limit: 2, page: currentPage });
+            setMaxPage(data.meta.maxPages)
             setEbooks(data.ebooks);
         } catch (error) {
             console.log(error)
@@ -26,7 +28,7 @@ const Books = () => {
 
     useEffect(() => {
         fetchEbooks();
-    }, [])
+    }, [currentPage])
 
     return (
         <>
@@ -60,7 +62,6 @@ const Books = () => {
                             <Text style={styles.texButton}>Leer</Text>
                             <BookOpen size={18} color={'white'} />
                         </TouchableOpacity>
-
                     </View>
                 ))}
 

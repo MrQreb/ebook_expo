@@ -1,28 +1,57 @@
+import usePaginationStore from '@/src/store/pagination.store';
 import globalStyles from '@/src/styles/globalStyles';
 import { Text, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 
 const { height } = Dimensions.get('window');
 
 const Pagination = () => {
+
+  const { currentPage, maxPage, setCurrentPage } = usePaginationStore();
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= maxPage) {
+      setCurrentPage(page);
+    }
+  };
+
+  const getPages = () => {
+    const pages = new Set([
+      1,
+      currentPage, 
+      currentPage + 1, 
+      currentPage + 2,
+      currentPage - 1,
+      maxPage - 2, 
+      maxPage - 1, 
+      maxPage, 
+    ]);
+  
+    return Array.from(pages).filter(page => page >= 1 && page <= maxPage).sort((a, b) => a - b);
+  };
+  
+  const pages = getPages();
+
   return (
     <View style={styles.rowPagination}>
-      <TouchableOpacity style={styles.buttonPagination}><Text style={styles.textButton}>1</Text></TouchableOpacity>
-      <TouchableOpacity style={styles.buttonPagination}><Text style={styles.textButton}>2</Text></TouchableOpacity>
-      <TouchableOpacity style={styles.buttonPagination}><Text style={styles.textButton}>3</Text></TouchableOpacity>
-      <TouchableOpacity style={styles.buttonPagination}><Text style={styles.textButton}>...</Text></TouchableOpacity>
-      <TouchableOpacity style={styles.buttonPagination}><Text style={styles.textButton}>67</Text></TouchableOpacity>
-      <TouchableOpacity style={styles.buttonPagination}><Text style={styles.textButton}>69</Text></TouchableOpacity>
+      {pages.map((page) => (
+        <TouchableOpacity
+          key={page}
+          onPress={() => handlePageChange(page)}
+          style={styles.buttonPagination}
+        >
+          <Text style={[styles.textButton, currentPage === page && styles.selectedPage]}>{page}</Text>
+        </TouchableOpacity>
+      ))}
     </View>
-  )
+  );
 }
-
 const styles = StyleSheet.create({
 
   rowPagination: {
     width: '90%',
     margin: 'auto',
-    marginTop:35,
-    marginBottom:35,
+    marginTop: 35,
+    marginBottom: 35,
     height: height * 0.07,
     backgroundColor: '#DCDCDC',
     borderRadius: 20,
@@ -31,7 +60,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonPagination: {
-    width: '16.67%',
+    minWidth: 50,
+    width: '15%',
     height: height * 0.06,
     borderRadius: 20,
     justifyContent: 'center',
@@ -42,6 +72,15 @@ const styles = StyleSheet.create({
     fontWeight: 900,
     color: 'black',
     fontSize: 19
+  },
+  selectedPage: {
+    backgroundColor: 'black', 
+    color: 'white', 
+    paddingHorizontal: 15, 
+    paddingVertical: 5,
+    borderRadius: 12, 
+    textAlign: 'center', 
+
   }
 });
 
