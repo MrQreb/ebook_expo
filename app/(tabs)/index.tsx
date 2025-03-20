@@ -1,12 +1,13 @@
 
 import BooksScreen from '@/src/screens/BookScreen';
+import HomeScreen from '@/src/screens/HomeScreen';
 import { ScreenContainer } from '@/src/screens/Screen-Container';
 
-export default function HomeScreen() {
+export default function Home() {
   return (
    <ScreenContainer >
-        {/* <Home></Home> */}
-        <BooksScreen></BooksScreen>
+        <HomeScreen></HomeScreen>
+        {/* <BooksScreen></BooksScreen> */}
     </ScreenContainer>
   );
 }
