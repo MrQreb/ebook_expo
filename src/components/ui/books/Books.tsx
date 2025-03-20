@@ -6,11 +6,12 @@ import { Ebook, getBooks } from '@/src/api/ebook/get';
 import { useEffect, useState } from 'react';
 import { useRouter } from "expo-router";
 import usePaginationStore from '@/src/store/pagination.store';
+import NoData from './NoData';
 
 const { height, width } = Dimensions.get('window');
 const Books = () => {
 
-    const { currentPage, setMaxPage } = usePaginationStore();
+    const { currentPage, setMaxPage, search, isSearched } = usePaginationStore();
 
 
     const router = useRouter();
@@ -18,83 +19,62 @@ const Books = () => {
     let [ebooks, setEbooks] = useState<[]>([]);
     const fetchEbooks = async () => {
         try {
-            const data = await getBooks({ limit: 2, page: currentPage });
+            const data = await getBooks({ limit: 1, page: currentPage, name: search });
             setMaxPage(data.meta.maxPages)
             setEbooks(data.ebooks);
         } catch (error) {
-            console.log(error)
+            setEbooks([]);
         }
     }
 
     useEffect(() => {
         fetchEbooks();
-    }, [currentPage])
+        console.log(ebooks.length)
+    }, [currentPage, isSearched])
 
     return (
         <>
-            <View style={styles.rowContainerBooks}>
-                {ebooks.map((ebook: Ebook, index) => (
+            {
+                ebooks.length >= 1 ? (
+                    <View style={styles.rowContainerBooks}>
+                        {ebooks.map((ebook: Ebook, index) => (
 
-                    <View key={index} style={styles.rowBoook}>
+                            <View key={index} style={styles.rowBoook}>
 
-                        <View style={styles.rowImage}>
-                            <Image
-                                source={{ uri: ebook.ebook_image_url }}
-                                style={styles.image}
-                                contentFit="fill"
-                            />
-                        </View>
+                                <View style={styles.rowImage}>
+                                    <Image
+                                        source={{ uri: ebook.ebook_image_url }}
+                                        style={styles.image}
+                                        contentFit="fill"
+                                    />
+                                </View>
 
-                        <View style={styles.rowTitle} >
-                            <Text style={styles.textTitle} numberOfLines={2}>{ebook.ebook_name}</Text>
-                        </View>
+                                <View style={styles.rowTitle} >
+                                    <Text style={styles.textTitle} numberOfLines={2}>{ebook.ebook_name}</Text>
+                                </View>
 
-                        <View style={styles.rowAuthor}>
-                            <Text style={styles.textAuthor} numberOfLines={2}>{ebook.ebook_author} ({ebook.ebook_published})</Text>
-                        </View>
+                                <View style={styles.rowAuthor}>
+                                    <Text style={styles.textAuthor} numberOfLines={2}>{ebook.ebook_author} ({ebook.ebook_published})</Text>
+                                </View>
 
-                        <TouchableOpacity
-                            style={styles.rowButton}
-                            onPress={() => {
-                                router.navigate(`../read?ebookUrl=${(ebook.ebook_pdf_url)}`);
-                            }}
-                        >
-                            <Text style={styles.texButton}>Leer</Text>
-                            <BookOpen size={18} color={'white'} />
-                        </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.rowButton}
+                                    onPress={() => {
+                                        router.navigate(`../read?ebookUrl=${(ebook.ebook_pdf_url)}`);
+                                    }}
+                                >
+                                    <Text style={styles.texButton}>Leer</Text>
+                                    <BookOpen size={18} color={'white'} />
+                                </TouchableOpacity>
+                            </View>
+                        ))}
                     </View>
-                ))}
+                ) : (
+                    <NoData />
+                )
 
-                {/* <View style={styles.rowBoook}>
-                    <View style={styles.rowImage}>
-                        <Image
-                            source={{ uri: 'https://example.com/ebook1.jpg' }}
-                            style={styles.image}
-                            contentFit="fill"
-                        />
-                    </View>
+            }
 
-                    <View style={styles.rowTitle}>
-                        <Text style={styles.textTitle} numberOfLines={2}>Ebook Title 1</Text>
-                    </View>
-
-                    <View style={styles.rowAuthor}>
-                        <Text style={styles.textAuthor} numberOfLines={1}>Author 1</Text>
-                    </View>
-
-                    <TouchableOpacity
-                        style={styles.rowButton}
-                        onPress={() => {
-                            redirectTo(router, '../read', 0);
-                        }}
-                    >
-                        <Text style={styles.texButton}>Leer</Text>
-                        <BookOpen size={18} color={'white'} />
-                    </TouchableOpacity>
-                </View> */}
-
-
-            </View>
 
         </>
     )

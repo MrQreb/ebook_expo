@@ -45,7 +45,6 @@ export async function getBooks({ name, limit = 10, page = 1 }: queryParams = {})
 
         return await response.json();
     } catch (error) {
-        console.error("Error fetching ebooks:", error);
         throw error;
     }
 }
