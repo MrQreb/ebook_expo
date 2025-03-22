@@ -23,6 +23,7 @@ const Search = () => {
                 placeholder="Buscar un libro"
                 placeholderTextColor="#4E4E4E"
                 onChangeText={handleText} 
+                value={search}
             />
             <TouchableOpacity
                 style={styles.iconContainer}

@@ -1,8 +1,19 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { Image } from 'expo-image';
 import globalStyles from '@/src/styles/globalStyles';
+import Button from '../login/Button';
+import usePaginationStore from '@/src/store/pagination.store';
 
-const NoData = () => {
+const NotFound = () => {
+
+    let { setSearch, setIsSearched, isSearched } = usePaginationStore();
+
+
+    const handlePress = () =>{
+       setSearch('');
+       setIsSearched(!isSearched);
+    }
+
     return (
         <>
             <View style={styles.rowContainerBooks}>
@@ -21,6 +32,11 @@ const NoData = () => {
                 <View style={styles.rowSubtitle}>
                     <Text style={styles.subTitle}>Prueba otra busqueda!</Text>
                 </View>
+
+                <Button
+                    text='Volver'
+                    onPress={handlePress}
+                />
             </View>
         </>
     );
@@ -70,4 +86,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NoData;
+export default NotFound;

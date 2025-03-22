@@ -6,7 +6,7 @@ const { height } = Dimensions.get('window');
 
 const Pagination = () => {
 
-  const { currentPage, maxPage, setCurrentPage } = usePaginationStore();
+  const { currentPage, maxPage, setCurrentPage, numberResults } = usePaginationStore();
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= maxPage) {
@@ -17,32 +17,36 @@ const Pagination = () => {
   const getPages = () => {
     const pages = new Set([
       1,
-      currentPage, 
-      currentPage + 1, 
+      currentPage,
+      currentPage + 1,
       currentPage + 2,
       currentPage - 1,
-      maxPage - 2, 
-      maxPage - 1, 
-      maxPage, 
+      maxPage - 2,
+      maxPage - 1,
+      maxPage,
     ]);
-  
+
     return Array.from(pages).filter(page => page >= 1 && page <= maxPage).sort((a, b) => a - b);
   };
-  
+
   const pages = getPages();
 
   return (
-    <View style={styles.rowPagination}>
-      {pages.map((page) => (
-        <TouchableOpacity
-          key={page}
-          onPress={() => handlePageChange(page)}
-          style={styles.buttonPagination}
-        >
-          <Text style={[styles.textButton, currentPage === page && styles.selectedPage]}>{page}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
+    <>
+      {numberResults >= 1 && (
+        <View style={styles.rowPagination}>
+          {pages.map((page) => (
+            <TouchableOpacity
+              key={page}
+              onPress={() => handlePageChange(page)}
+              style={styles.buttonPagination}
+            >
+              <Text style={[styles.textButton, currentPage === page && styles.selectedPage]}>{page}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+    </>
   );
 }
 const styles = StyleSheet.create({
@@ -74,12 +78,12 @@ const styles = StyleSheet.create({
     fontSize: 19
   },
   selectedPage: {
-    backgroundColor: 'black', 
-    color: 'white', 
-    paddingHorizontal: 15, 
+    backgroundColor: 'black',
+    color: 'white',
+    paddingHorizontal: 15,
     paddingVertical: 5,
-    borderRadius: 12, 
-    textAlign: 'center', 
+    borderRadius: 12,
+    textAlign: 'center',
 
   }
 });

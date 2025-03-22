@@ -6,12 +6,12 @@ import { Ebook, getBooks } from '@/src/api/ebook/get';
 import { useEffect, useState } from 'react';
 import { useRouter } from "expo-router";
 import usePaginationStore from '@/src/store/pagination.store';
-import NoData from './NoData';
+import NotFound from './NotFound';
 
 const { height, width } = Dimensions.get('window');
 const Books = () => {
 
-    const { currentPage, setMaxPage, search, isSearched } = usePaginationStore();
+    const { currentPage, setMaxPage, search, isSearched, setNumberResults } = usePaginationStore();
 
 
     const router = useRouter();
@@ -19,17 +19,22 @@ const Books = () => {
     let [ebooks, setEbooks] = useState<[]>([]);
     const fetchEbooks = async () => {
         try {
-            const data = await getBooks({ limit: 1, page: currentPage, name: search });
+
+            const data = await getBooks({ limit: 2, page: currentPage, name: search });
             setMaxPage(data.meta.maxPages)
             setEbooks(data.ebooks);
+
+            setNumberResults(data.ebooks.length);
         } catch (error) {
             setEbooks([]);
+            
+            // conditional render in Pagination
+            setNumberResults(0);
         }
     }
 
     useEffect(() => {
         fetchEbooks();
-        console.log(ebooks.length)
     }, [currentPage, isSearched])
 
     return (
@@ -70,7 +75,7 @@ const Books = () => {
                         ))}
                     </View>
                 ) : (
-                    <NoData />
+                    <NotFound />
                 )
 
             }
