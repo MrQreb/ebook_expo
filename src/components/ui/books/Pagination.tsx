@@ -1,4 +1,4 @@
-import usePaginationStore from '@/src/store/pagination.store';
+import useBooksStore from '@/src/store/books.store';
 import globalStyles from '@/src/styles/globalStyles';
 import { Text, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 
@@ -6,7 +6,7 @@ const { height } = Dimensions.get('window');
 
 const Pagination = () => {
 
-  const { currentPage, maxPage, setCurrentPage, numberResults } = usePaginationStore();
+  const { currentPage, maxPage, setCurrentPage, numberResults } = useBooksStore();
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= maxPage) {

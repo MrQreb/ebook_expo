@@ -2,16 +2,16 @@ import { Text, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-nati
 import { Image } from 'expo-image';
 import { BookOpen } from 'lucide-react-native';
 import globalStyles from '@/src/styles/globalStyles';
-import { Ebook, getBooks } from '@/src/api/ebook/get';
+import { Ebook, getBooks } from '@/src/api/ebook/getBooks';
 import { useEffect, useState } from 'react';
 import { useRouter } from "expo-router";
-import usePaginationStore from '@/src/store/pagination.store';
+import useBooksStore from '@/src/store/books.store';
 import NotFound from './NotFound';
 
 const { height, width } = Dimensions.get('window');
 const Books = () => {
 
-    const { currentPage, setMaxPage, search, isSearched, setNumberResults } = usePaginationStore();
+    const { currentPage, setMaxPage, search, isSearched, setNumberResults } = useBooksStore();
 
 
     const router = useRouter();
@@ -20,7 +20,7 @@ const Books = () => {
     const fetchEbooks = async () => {
         try {
 
-            const data = await getBooks({ limit: 2, page: currentPage, name: search });
+            const data = await getBooks({ limit: 2, page: currentPage, name: search, author:search });
             setMaxPage(data.meta.maxPages)
             setEbooks(data.ebooks);
 

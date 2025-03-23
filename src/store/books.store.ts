@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface PaginationState {
+interface BooksState {
     currentPage: number;
     maxPage: number;
     search: string;
@@ -13,7 +13,7 @@ interface PaginationState {
     setNumberResults:(numberResults:number) => void;
 }
 
-const usePaginationStore = create<PaginationState>((set) => ({
+const useBooksStore = create<BooksState>((set) => ({
     currentPage: 1, 
     maxPage: 1, 
     search: '',
@@ -27,4 +27,4 @@ const usePaginationStore = create<PaginationState>((set) => ({
     }
 }));
 
-export default usePaginationStore;
+export default useBooksStore;

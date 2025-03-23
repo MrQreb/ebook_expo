@@ -1,11 +1,11 @@
-import usePaginationStore from "@/src/store/pagination.store";
+import useBooksStore from "@/src/store/books.store";
 import globalStyles from "@/src/styles/globalStyles";
 import { SearchIcon } from "lucide-react-native";
 import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native"
 
 const Search = () => {
 
-    const {search, setSearch, isSearched, setIsSearched } = usePaginationStore();
+    const {search, setSearch, isSearched, setIsSearched } = useBooksStore();
 
     const handleText = (text: string) => {
         setSearch(text);

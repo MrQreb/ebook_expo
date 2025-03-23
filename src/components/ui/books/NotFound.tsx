@@ -2,11 +2,11 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Image } from 'expo-image';
 import globalStyles from '@/src/styles/globalStyles';
 import Button from '../login/Button';
-import usePaginationStore from '@/src/store/pagination.store';
+import useBooksStore from '@/src/store/books.store';
 
 const NotFound = () => {
 
-    let { setSearch, setIsSearched, isSearched } = usePaginationStore();
+    let { setSearch, setIsSearched, isSearched } = useBooksStore();
 
 
     const handlePress = () =>{

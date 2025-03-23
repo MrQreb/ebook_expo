@@ -14,14 +14,16 @@ export interface Ebook {
 
 interface queryParams {
     name?: string;
+    author?: string;
     limit?: number;
     page?: number;
 }
 
-export async function getBooks({ name, limit = 10, page = 1 }: queryParams = {}) {
+export async function getBooks({ name, author, limit = 10, page = 1 }: queryParams = {}) {
 
     const query: URLSearchParams = new URLSearchParams();
     if (name) query.append("name", name);
+    if (author) query.append("author", author);
     if (limit) query.append("limit", limit.toString());
     if (page) query.append("page", page.toString());
 
